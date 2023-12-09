@@ -233,7 +233,6 @@ public class ReversiGUI extends JFrame implements ReversiView {
   }
 
 
-
   private void discSelectorHelper(JButton button, int x, int y) {
     DiscColor originalColor = model.getDiscAt(x, y).getColor();
     switch (originalColor) {

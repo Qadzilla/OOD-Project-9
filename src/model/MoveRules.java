@@ -33,32 +33,34 @@ public class MoveRules {
     } else if (moveDirection == MoveDirection.DOWNLEFT) {
       res = (y % 2 == 0) ? applyShift(x, y, -1, 1)
               : applyShift(x, y, 0, 1);
+    } else {
+      // do nothing
     }
     return res;
   }
 
-//  public static List<Integer> applyShiftBasedOnDirectionSquare(int x, int y,
-//                                                         MoveDirection moveDirection) {
-//    ArrayList<Integer> res = new ArrayList<>();
-//    if (moveDirection == MoveDirection.LEFT) {
-//      res = applyShift(x, y, -1, 0);
-//    } else if (moveDirection == MoveDirection.RIGHT) {
-//      res = applyShift(x, y, 1, 0);
-//    } else if (moveDirection == MoveDirection.UPRIGHT) {
-//      res = applyShift(x,y,-1,-1);
-//    } else if (moveDirection == MoveDirection.DOWNRIGHT) {
-//      res = applyShift(x,y,-1,1);
-//    } else if (moveDirection == MoveDirection.UPLEFT) {
-//      res = applyShift(x,y,1,-1);
-//    } else if (moveDirection == MoveDirection.DOWNLEFT) {
-//      res = applyShift(x,y,1,1);
-//    } else if (moveDirection == MoveDirection.UP) {
-//      res = applyShift(x,y,0,-1);
-//    } else if (moveDirection == MoveDirection.DOWN) {
-//      res = applyShift(x,y,0,1);
-//    }
-//    return res;
-//  }
+  public static List<Integer> applyShiftBasedOnDirectionSquare(int x, int y,
+                                                         MoveDirection moveDirection) {
+    ArrayList<Integer> res = new ArrayList<>();
+    if (moveDirection == MoveDirection.LEFT) {
+      res = applyShift(x, y, -1, 0);
+    } else if (moveDirection == MoveDirection.RIGHT) {
+      res = applyShift(x, y, 1, 0);
+    } else if (moveDirection == MoveDirection.UPRIGHT) {
+      res = applyShift(x,y,-1,-1);
+    } else if (moveDirection == MoveDirection.DOWNRIGHT) {
+      res = applyShift(x,y,-1,1);
+    } else if (moveDirection == MoveDirection.UPLEFT) {
+      res = applyShift(x,y,1,-1);
+    } else if (moveDirection == MoveDirection.DOWNLEFT) {
+      res = applyShift(x,y,1,1);
+    } else if (moveDirection == MoveDirection.UP) {
+      res = applyShift(x,y,0,-1);
+    } else if (moveDirection == MoveDirection.DOWN) {
+      res = applyShift(x,y,0,1);
+    }
+    return res;
+  }
 
   // a helper method that returns an arraylist representing a coordinate
   // pair post shift.

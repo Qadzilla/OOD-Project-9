@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import discs.DiscColor;
+import discs.DiscType;
 
 
 /**
@@ -44,7 +45,16 @@ public class BoardUtils {
       // the class invariant is enforced here because we are getting a color
       // purely based on which player turn it currently is.
       DiscColor playerTurnColor = rorm.getPlayerColor(rorm.currentTurn());
-      List<Integer> nextPos = MoveRules.applyShiftBasedOnDirection(x, y, moveDirection);
+      List<Integer> nextPos;
+      if (rorm.getGameType() == DiscType.HEXDISC) {
+         nextPos = MoveRules.applyShiftBasedOnDirection(x, y, moveDirection);
+         if (nextPos.isEmpty()) {
+           return new ArrayList<>();
+         }
+      } else {
+        nextPos = MoveRules.applyShiftBasedOnDirectionSquare(x, y, moveDirection);
+      }
+
       int nextPosX = nextPos.get(0);
       int nextPosY = nextPos.get(1);
       x = nextPosX;

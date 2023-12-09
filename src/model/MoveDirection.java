@@ -4,8 +4,8 @@ package model;
  * Specifies all the MoveDirection possible in Reversi.
  */
 public enum MoveDirection {
-//  UP,
-//  DOWN,
+  UP,
+  DOWN,
   LEFT,
   RIGHT,
   UPLEFT,
