@@ -5,5 +5,6 @@ package discs;
  * for the model to interpret.
  */
 public enum DiscType {
-  HEXDISC
+  HEXDISC,
+  SQUARE
 }

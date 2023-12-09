@@ -5,6 +5,7 @@ import java.util.List;
 
 import discs.Disc;
 import discs.DiscColor;
+import discs.DiscType;
 import player.PlayerTurn;
 
 /**
@@ -107,5 +108,8 @@ public interface ReadOnlyReversiModel extends Serializable {
   List<ReadOnlyReversiModel> getGameStates();
 
   List<List<Integer>> getMoves();
+
+  DiscType getGameType();
+  int getCapturedOnMove(int x, int y);
 
 }

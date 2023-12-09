@@ -5,11 +5,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -33,7 +30,7 @@ public class ReversiGUI extends JFrame implements ReversiView {
   private final JButton[][] boardButtons;
   private int prevX = -1;
   private int prevY = -1;
-
+  private boolean showCaptured;
   private List<PlayerListener> playerListeners = new ArrayList<>();
 
   /**
@@ -41,6 +38,7 @@ public class ReversiGUI extends JFrame implements ReversiView {
    */
   public ReversiGUI(ReadOnlyReversiModel model) {
     this.model = model;
+    this.showCaptured = true;
 
     getContentPane().setBackground(Color.DARK_GRAY);
     setTitle(model.getType() + " Reversi");
@@ -100,9 +98,15 @@ public class ReversiGUI extends JFrame implements ReversiView {
                   prevX = actualJ;
                   prevY = actualI;
                   button.setIcon(newHexagonIcon(Color.CYAN));
+                  if(showCaptured) {
+                    displayCaptured(button, actualJ, actualI);
+                  }
                 } else {
                   discSelectorHelper(boardButtons[prevY][prevX], prevX, prevY);
                   button.setIcon(newHexagonIcon(Color.CYAN));
+                  if(showCaptured) {
+                    displayCaptured(button, actualJ, actualI);
+                  }
                   prevX = actualJ;
                   prevY = actualI;
                 }
@@ -180,7 +184,7 @@ public class ReversiGUI extends JFrame implements ReversiView {
 
           @Override
           public void keyReleased(KeyEvent e) {
-            // needs to be overridden.
+
           }
         });
         add(boardButtons[i][j]);
@@ -195,6 +199,40 @@ public class ReversiGUI extends JFrame implements ReversiView {
     setVisible(true);
     render();
   }
+
+  private void putNumberOnButtonIcon(JButton button, int captured) {
+    Icon icon = button.getIcon();
+    if (icon instanceof ImageIcon) {
+
+      BufferedImage image = convertIconToBufferedImage((ImageIcon) icon);
+
+      Graphics2D g2d = image.createGraphics();
+
+      g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+      g2d.setFont(new Font("Arial", Font.BOLD, 20));
+      g2d.setColor(Color.RED);
+
+      FontMetrics fm = g2d.getFontMetrics();
+      int stringWidth = fm.stringWidth(String.valueOf(captured));
+      int stringHeight = fm.getAscent();
+      int x = (image.getWidth() - stringWidth) / 2;
+      int y = (image.getHeight() + stringHeight) / 2;
+
+      g2d.drawString(String.valueOf(captured), x, y);
+
+      g2d.dispose();
+
+      button.setIcon(new ImageIcon(image));
+    }
+  }
+
+  private void displayCaptured(JButton button, int x, int y) {
+    this.putNumberOnButtonIcon(button,  model.getCapturedOnMove(x, y));
+  }
+
+
 
   private void discSelectorHelper(JButton button, int x, int y) {
     DiscColor originalColor = model.getDiscAt(x, y).getColor();

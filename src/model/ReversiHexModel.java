@@ -20,7 +20,7 @@ import discs.GameDisc;
 /**
  * A 'ReversiHexModel' defines a hexagonal Reversi game.
  */
-public class ReversiHexModel implements ReversiModel {
+public class ReversiHexModel extends BoardUtils implements ReversiModel {
   protected boolean gameOn;
   protected Disc[][] gameBoard;
   protected PlayerTurn pt;
@@ -430,7 +430,7 @@ public class ReversiHexModel implements ReversiModel {
         if (this.gameBoard[j][i] == null) {
           int doNothing = 0;
         } else if (this.gameBoard[j][i].getColor() == DiscColor.FACEDOWN) {
-          List<List<List<Integer>>> moves = BoardUtils.bfs(this, i, j);
+          List<List<List<Integer>>> moves = bfs(this, i, j);
           boolean allEmptyLists = moves.stream().allMatch(List::isEmpty);
           if (!allEmptyLists) {
             return false;
@@ -538,6 +538,11 @@ public class ReversiHexModel implements ReversiModel {
     return null;
   }
 
+  @Override
+  public DiscType getGameType() {
+    return this.type;
+  }
+
   // toggles a player after a move has been made or pass has been attempted
   private void togglePlayer() {
     this.gameNotYetStarted();
@@ -545,6 +550,25 @@ public class ReversiHexModel implements ReversiModel {
       this.pt = PlayerTurn.PLAYER2;
     } else {
       this.pt = PlayerTurn.PLAYER1;
+    }
+  }
+  public int getCapturedOnMove(int x, int y) {
+    List<List<List<Integer>>> moves = BoardUtils.bfs(this, x, y);
+    if(moves.isEmpty()) {
+      return 0;
+    } else {
+      Map<List<Integer>, Boolean> encounteredLists = new HashMap<>();
+      int uniqueCount = 0;
+
+      for (List<List<Integer>> doubleList : moves) {
+        for (List<Integer> singleList : doubleList) {
+          if (!encounteredLists.containsKey(singleList)) {
+            encounteredLists.put(singleList, true);
+            uniqueCount++;
+          }
+        }
+      }
+      return uniqueCount - 1;
     }
   }
 }
