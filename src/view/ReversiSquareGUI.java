@@ -192,7 +192,7 @@ public class ReversiSquareGUI extends JFrame implements ReversiView {
 
   @Override
   public void showPopup(String message) {
-
+    JOptionPane.showMessageDialog(this, message);
   }
 
   public static void main(String[] args) {
