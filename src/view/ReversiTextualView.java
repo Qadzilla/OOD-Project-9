@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 import java.util.List;
 
+import controller.PlayerListener;
 import discs.Disc;
 import discs.DiscColor;
 import model.ReadOnlyReversiModel;
@@ -106,5 +107,10 @@ public class ReversiTextualView implements ReversiView {
   @Override
   public void showPopup(String message) {
     // only neccesary for a ReversiGUI
+  }
+
+  @Override
+  public void addListener(PlayerListener playerListener) {
+
   }
 }

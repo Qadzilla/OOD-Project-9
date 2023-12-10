@@ -4,6 +4,8 @@ import model.ReversiModel;
 import player.Player;
 import player.PlayerTurn;
 import view.ReversiGUI;
+import view.ReversiView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +17,8 @@ import java.util.List;
 public class ReversiController implements ControllerListener {
 
   private final ReversiModel reversiModel;
-  private final ReversiGUI reversiView;
-
+  private final ReversiView reversiView;
   private final Player player;
-
   private ModelListener modelListener;
   private PlayerListener playerListener;
   private List<ReversiController> controllerListeners = new ArrayList<>();
@@ -29,7 +29,7 @@ public class ReversiController implements ControllerListener {
    * @param reversiView a reversiView
    * @param player a player
    */
-  public ReversiController(ReversiModel reversiModel, ReversiGUI reversiView, Player player) {
+  public ReversiController(ReversiModel reversiModel, ReversiView reversiView, Player player) {
     this.reversiModel = reversiModel;
     this.reversiView = reversiView;
     this.player = player;

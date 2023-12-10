@@ -42,7 +42,7 @@ public class ReversiSquareGUI extends JFrame implements ReversiView {
       for (int j = 0; j < dimensions; j++) {
         boardButtons[i][j] = new JButton();
         boardButtons[i][j].setOpaque(true);
-        boardButtons[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        boardButtons[i][j].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         int actualI = i;
         int actualJ = j;
         boardButtons[i][j].addMouseListener(new MouseListener() {
@@ -60,15 +60,9 @@ public class ReversiSquareGUI extends JFrame implements ReversiView {
                   prevX = actualJ;
                   prevY = actualI;
                   button.setBackground(Color.CYAN);
-                  if (showCaptured) {
-                    displayCaptured(button, actualJ, actualI);
-                  }
                 } else {
                   discSelectorHelper(boardButtons[prevY][prevX], prevX, prevY);
                   button.setBackground(Color.CYAN);
-                  if (showCaptured) {
-                    displayCaptured(button, actualJ, actualI);
-                  }
                   prevX = actualJ;
                   prevY = actualI;
                 }
@@ -150,9 +144,7 @@ public class ReversiSquareGUI extends JFrame implements ReversiView {
     render();
   }
 
-  /**
-   * The addListener method adds relevant listeners.
-   */
+  @Override
   public void addListener(PlayerListener pl) {
     playerListeners.add(pl);
   }
@@ -164,14 +156,6 @@ public class ReversiSquareGUI extends JFrame implements ReversiView {
     for (PlayerListener pl : playerListeners) {
       pl.update(playerEvent);
     }
-  }
-
-  private void putNumberOnButtonIcon(JButton button, int captured) {
-
-  }
-
-  private void displayCaptured(JButton button, int x, int y) {
-    this.putNumberOnButtonIcon(button, model.getCapturedOnMove(x, y));
   }
 
   private void discSelectorHelper(JButton button, int x, int y) {

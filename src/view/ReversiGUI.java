@@ -250,9 +250,7 @@ public class ReversiGUI extends JFrame implements ReversiView {
     }
   }
 
-  /**
-   * The addListener method adds relevant listeners.
-   */
+@Override
   public void addListener(PlayerListener pl) {
     playerListeners.add(pl);
   }

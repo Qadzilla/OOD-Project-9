@@ -1,5 +1,7 @@
 package view;
 
+import controller.PlayerListener;
+
 /**
  * The `ReversiView` interface represents the view component in a Reversi game.
  * It is responsible for rendering and displaying the game state to the players.
@@ -13,4 +15,6 @@ public interface ReversiView {
   void render();
 
   void showPopup(String message);
+
+  void addListener(PlayerListener playerListener);
 }

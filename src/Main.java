@@ -2,10 +2,13 @@ import controller.ReversiController;
 import model.ReversiHexModel;
 import model.ReversiHexModelAI;
 import model.ReversiModel;
+import model.ReversiSquareModel;
 import player.Player;
 import player.PlayerTurn;
 import strategy.StrategyType;
 import view.ReversiGUI;
+import view.ReversiSquareGUI;
+import view.ReversiView;
 
 import javax.swing.JOptionPane;
 
@@ -78,11 +81,11 @@ public class Main {
     if (isAiGame) {
       model = new ReversiHexModelAI(strategyType);
     } else {
-      model = new ReversiHexModel();
+      model = new ReversiSquareModel();
     }
     model.startGame(boardsize);
-    ReversiGUI viewPlayer1 = new ReversiGUI(model);
-    ReversiGUI viewPlayer2 = new ReversiGUI(model);
+    ReversiSquareGUI viewPlayer1 = new ReversiSquareGUI(model);
+    ReversiSquareGUI viewPlayer2 = new ReversiSquareGUI(model);
     Player player1 = new Player(PlayerTurn.PLAYER1);
     Player player2 = new Player(PlayerTurn.PLAYER2);
     ReversiController controller1 = new ReversiController(model, viewPlayer1, player1);
@@ -103,8 +106,8 @@ public class Main {
     }
   }
 
-  private static void endScreen(ReversiModel model, ReversiGUI viewPlayer1,
-                                ReversiGUI viewPlayer2) {
+  private static void endScreen(ReversiModel model, ReversiView viewPlayer1,
+                                ReversiView viewPlayer2) {
     switch (model.getCurrentGameState()) {
       case PLAYER2WIN:
         viewPlayer1.showPopup("You Lost: Try Using A Strategy" +
