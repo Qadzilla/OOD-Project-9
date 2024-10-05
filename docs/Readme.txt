@@ -1,5 +1,3 @@
-Scroll down for part 2 changes/updates.
-
 Overview: What problem is this codebase trying to solve? What high-level assumptions are made in the codebase, either about the background knowledge needed, about what forms of extensibility are envisioned or are out of scope, or about prerequisites for using this code?
 
 The problem that the code base is trying to solve is Configuring a Model and corresponding text view for a game of hexagonal Reversi. We don’t have many high level assumptions besides the fact that our game only supports grids with an odd row and column amount where row = column. This is the case because we wanted to preserve symmetry on both sides of the hexagon. Another high level assumption is that only two individuals may play at the same time. We don’t have support for any other number of players besides two. For a person to use our program they must be familiar with hexagonal coordinate systems, specifically the offset coordinates : “odd-r” horizontal layout variation. A player may need background in the rules of Reversi as well.
